@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+    <main>
+      <h3><%= company.name %></h3>
+
+      <% if (company.verification_status === 'pending') { %>
+      <p class="notice">Your company is awaiting administrator verification. You can post internships once it is verified.</p>
+      <% } else if (company.verification_status === 'rejected') { %>
+      <p class="notice">Your registration was rejected. Please contact the administrator.</p>
+      <% } %>
+
+      <h4>Your internship listings</h4>
+      <% if (listings.length == 0) { %>
+      <p>You have not posted any internships yet.</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr><th>Title</th><th>Slots</th><th>Status</th><th>Applicants</th><th></th></tr>
+        </thead>
+        <tbody>
+          <% listings.forEach(l => { %>
+          <tr>
+            <td><%= l.title %></td>
+            <td><%= l.slots %></td>
+            <td><%= l.status %></td>
+            <td><a href="/listing/<%= l.listing_id %>/applicants"><%= l.applicant_count %> view</a></td>
+            <td>
+              <% if (company.verification_status === 'verified') { %>
+              <a href="/edit-listing/<%= l.listing_id %>">Edit</a>
+              <% } %>
+              <% if (l.status === 'open') { %>
+              <form style="display: inline" action="/close-listing/<%= l.listing_id %>" method="POST"><button>Close</button></form>
+              <% } else if (company.verification_status === 'verified') { %>
+              <form style="display: inline" action="/reopen-listing/<%= l.listing_id %>" method="POST"><button>Reopen</button></form>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+
+      <% if (placements.length) { %>
+      <h4>Approved placements - record completion feedback</h4>
+      <% placements.forEach(p => { %>
+      <form action="/placement/<%= p.placement_id %>/completion" method="POST">
+        <fieldset>
+          <legend><%= p.full_name %> - <%= p.title %> (<%= p.start_date %> to <%= p.end_date %>)</legend>
+          <textarea name="completion_note" placeholder="How did the intern perform?"><%= p.completion_note || '' %></textarea>
+          <br />
+          <button>Save feedback</button>
+        </fieldset>
+      </form>
+      <% }) %>
+      <% } %>
+    </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

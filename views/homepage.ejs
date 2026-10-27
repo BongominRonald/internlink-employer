@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+    <main>
+      <form action="/register" method="POST">
+        <% errors.forEach(error => { %>
+        <p class="notice"><%= error %></p>
+        <% }) %>
+
+        <fieldset>
+          <legend>Register your company</legend>
+          <label for="companyName"><small>Company name</small></label>
+          <input type="text" id="companyName" name="companyName" autocomplete="off" />
+
+          <label for="sector"><small>Sector</small></label>
+          <input type="text" id="sector" name="sector" autocomplete="off" />
+
+          <label for="location"><small>Location</small></label>
+          <input type="text" id="location" name="location" autocomplete="off" />
+
+          <label for="email"><small>Work email</small></label>
+          <input type="email" id="email" name="email" autocomplete="off" />
+
+          <label for="password"><small>Password</small></label>
+          <input type="password" id="password" name="password" autocomplete="off" />
+
+          <br />
+          <button>Register</button>
+          <p><small>New companies stay "pending" until an administrator verifies them.</small></p>
+        </fieldset>
+      </form>
+    </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

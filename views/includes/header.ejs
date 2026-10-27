@@ -1,0 +1,13 @@
+<header>
+  <h2><a href="/">InternLink Uganda <small>Employer portal</small></a></h2>
+  <nav>
+    <% if (user && company) { %>
+    <% if (company.verification_status === 'verified') { %>
+    <a href="/create-listing">Post Internship</a>
+    <% } %>
+    <a href="/logout">Log Out</a>
+    <% } else { %>
+    <a href="/login">Log In</a>
+    <% } %>
+  </nav>
+</header>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+    <main>
+      <h3>Applicants for: <%= listing.title %></h3>
+      <p><a href="/">&larr; Back to dashboard</a></p>
+
+      <% if (applicants.length == 0) { %>
+      <p>No applications yet.</p>
+      <% } else { %>
+      <table>
+        <thead>
+          <tr><th>Student</th><th>Programme</th><th>Year</th><th>Skills</th><th>Match</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+          <% applicants.forEach(a => { %>
+          <tr>
+            <td><%= a.full_name %></td>
+            <td><%= a.programme %></td>
+            <td><%= a.year %></td>
+            <td><%= a.skills %></td>
+            <td><%= a.match_score %>%</td>
+            <td><%= a.status %></td>
+            <td>
+              <% if (a.status === 'submitted' || a.status === 'shortlisted') { %>
+              <form style="display: inline" action="/application/<%= a.application_id %>/decision" method="POST">
+                <% if (a.status === 'submitted') { %><button name="decision" value="shortlisted">Shortlist</button><% } %>
+                <button name="decision" value="rejected">Reject</button>
+              </form>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

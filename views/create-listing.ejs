@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <%- include('includes/header') %>
+
+    <main>
+      <form action="/create-listing" method="POST">
+        <% errors.forEach(error => { %>
+        <p class="notice"><%= error %></p>
+        <% }) %>
+
+        <fieldset>
+          <legend>Post an Internship</legend>
+          <%- include('includes/listing-fields') %>
+          <br />
+          <button>Post Internship</button>
+        </fieldset>
+      </form>
+    </main>
+
+    <%- include('includes/footer') %>
+  </body>
+</html>

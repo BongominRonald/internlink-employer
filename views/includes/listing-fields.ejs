@@ -1,0 +1,20 @@
+<label for="title"><small>Title</small></label>
+<input type="text" id="title" name="title" value="<%= listing.title || '' %>" autocomplete="off" />
+
+<label for="description"><small>Description</small></label>
+<textarea name="description" id="description"><%= listing.description || '' %></textarea>
+
+<label for="required_skills"><small>Required skills (comma separated)</small></label>
+<input type="text" id="required_skills" name="required_skills" value="<%= listing.required_skills || '' %>" autocomplete="off" />
+
+<label for="programme"><small>Programme (e.g. BSE)</small></label>
+<input type="text" id="programme" name="programme" value="<%= listing.programme || '' %>" autocomplete="off" />
+
+<label for="duration"><small>Duration (e.g. 12 weeks)</small></label>
+<input type="text" id="duration" name="duration" value="<%= listing.duration || '' %>" autocomplete="off" />
+
+<label for="slots"><small>Slots</small></label>
+<input type="number" min="1" id="slots" name="slots" value="<%= listing.slots || 1 %>" />
+
+<label for="location"><small>Location</small></label>
+<input type="text" id="location" name="location" value="<%= listing.location || '' %>" autocomplete="off" />

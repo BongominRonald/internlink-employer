@@ -1,0 +1,7 @@
+.env
+node_modules/
+ourApp.db
+ourApp.db-shm
+ourApp.db-walinternlink.db
+internlink.db-shm
+internlink.db-wal
